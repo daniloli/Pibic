@@ -1,2 +1,0 @@
-# Pibic
-Trabalho de Pibic
