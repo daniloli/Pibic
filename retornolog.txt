@@ -1,0 +1,27 @@
+name<-readline(prompt='Digite o simbolo da empresa:')
+AAPL
+name<-sprintf('C:/danilo/pibic/%s.txt',name)
+tabela<-read.table(name,sep=',')
+
+log.return<-function(v,d,x=tabela)
+{
+k<-switch(v,
+'date'=x$V1,
+'close'=x$V2,
+'high'=x$V3,
+'low'=x$V4,
+'open'=x$V5,
+'volume'=x$V6,
+'erro')
+o<-c()
+for (i in (d:length(k)))
+
+o<-append(o,log(k[i]/k[i-d]))
+
+return (o)
+}
+
+q<-log.return(2,50)
+plot(q,type='l',main='retorno log')
+x11()
+plot(density(q),main='density plot, retorno log',col='green')
