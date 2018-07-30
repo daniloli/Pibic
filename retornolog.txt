@@ -1,6 +1,7 @@
-name<-readline(prompt='Digite o simbolo da empresa:')
-AAPL
-name<-sprintf('C:/danilo/pibic/%s.txt',name)
+name<-readline(prompt='Digite o endereço do arquivo texto:')
+
+#É necessário digitar o endereço do arquivo texto gerado pelo código python nesta linha.
+
 tabela<-read.table(name,sep=',')
 
 log.return<-function(v,d,x=tabela)
@@ -21,7 +22,9 @@ o<-append(o,log(k[i]/k[i-d]))
 return (o)
 }
 
+#Abaixo está um exemplo de como chamar a função: fornecer qual variável deseja estudar e fornecer o tamanho da janela.
+#No exemplo, a variável escolhida foi Close e janela d=50. 
 q<-log.return(2,50)
-plot(q,type='l',main='retorno log')
+plot(q,type='l',main='retorno log',col='blue')
 x11()
-plot(density(q),main='density plot, retorno log',col='green')
+plot(density(q),main='density plot, retorno log',col='blue')
