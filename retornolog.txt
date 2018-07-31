@@ -25,6 +25,7 @@ return (o)
 #Abaixo está um exemplo de como chamar a função: fornecer qual variável deseja estudar e fornecer o tamanho da janela.
 #No exemplo, a variável escolhida foi Close e janela d=50. 
 q<-log.return(2,50)
+x11()
 plot(q,type='l',main='retorno log',col='blue')
 x11()
 plot(density(q),main='density plot, retorno log',col='blue')
