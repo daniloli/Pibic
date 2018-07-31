@@ -17,6 +17,17 @@ squares=list(map(lambda x:pow(x,2),Rt))
 soma=[]
 for i in range (len(Rt)-d):
     soma.append(sum(squares[i:i+d])/d)
+    
+    
+theil=[]
+for i in range(len(serie)-d):
+    Mu=sum(serie[i:i+d])/d
+    janela=[]
+    for j in range(d):
+        s=(serie[i+d]/Mu)+log(serie[i+d]/Mu)
+        janela.append(s)
+    theil.append((sum (janela)/d))
+
 figure(1)
 plot(Rt)
 xlabel('t')
@@ -36,3 +47,7 @@ figure(4)
 sns.distplot(soma,hist=False)
 title('densityplot jm d=%d'%d)
 savefig('dp soma jm d=%d.jpeg'%d)
+figure(5)
+plot(theil)
+title('Indice de Theil, d=%d'%d)
+savefig('Indice de Theil, d=%d'%d)
