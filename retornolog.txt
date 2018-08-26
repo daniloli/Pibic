@@ -1,3 +1,4 @@
+#Código para linguagem R
 name<-readline(prompt='Digite o endereço do arquivo texto:')
 
 #É necessário digitar o endereço do arquivo texto gerado pelo código python nesta linha.
