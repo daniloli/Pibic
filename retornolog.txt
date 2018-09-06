@@ -1,32 +1,48 @@
 #Código para linguagem R
-name<-readline(prompt='Digite o endereço do arquivo texto:')
 
-#É necessário digitar o endereço do arquivo texto gerado pelo código python nesta linha.
+name<-readline(prompt='Digite o diretorio do arquivo:')
 
-tabela<-read.table(name,sep=',')
+#É necessário digitar o endereço do arquivo texto ou csv utilizado para a leitura de dados nesta linha.
 
-log.return<-function(v,d,x=tabela)
+C:/danilo/pibic/Pibic/AAPL.csv
+name<-sprintf('%s',name)
+tabela<-read.table(name,sep=',',header=TRUE)
+
+log.return<-function(v,x=tabela)
 {
 k<-switch(v,
-'date'=x$V1,
-'close'=x$V2,
-'high'=x$V3,
-'low'=x$V4,
-'open'=x$V5,
-'volume'=x$V6,
+'date'=x[,1],
+'close'=x[,2],
+'high'=x[,3],
+'low'=x[,4],
+'open'=x[,5],
+'volume'=x[,6],
 'erro')
-o<-c()
-for (i in (d:length(k)))
+a<-as.numeric(levels(k))[k]
+a<-a[!is.na(a)]
 
-o<-append(o,log(k[i]/k[i-d]))
-
-return (o)
+return (a)
 }
+d<-100
+q<-log.return(2)
+plot(q,type='l',main='serie',col='blue')
+o<-c()
+p<-c()
+for (i in (d:length(q))){
 
-#Abaixo está um exemplo de como chamar a função: fornecer qual variável deseja estudar e fornecer o tamanho da janela.
-#No exemplo, a variável escolhida foi Close e janela d=50. 
-q<-log.return(2,50)
-x11()
-plot(q,type='l',main='retorno log',col='blue')
-x11()
-plot(density(q),main='density plot, retorno log',col='blue')
+o<-append(o,log(q[i]/q[i-d]))
+}
+for (i in (1:(length(q)-d))){
+s<-0
+m<-mean(q[i:i+d])
+for (j in (0:(d-1))){
+
+s<-s+((q[i+j]/m)*log(q[i+j]/m))
+}
+p<-append(p,(s/d))
+}
+plx11()
+plot(o,type='l',main='retorno log',col='blue')
+
+
+
